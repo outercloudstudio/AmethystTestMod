@@ -7,6 +7,7 @@ set(MOD_AUTHOR "FrederoxDev")
 set(CMAKE_CONFIGURATION_TYPES "RelWithDebInfo" CACHE STRING "Build configurations" FORCE)
 set(CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING "Choose the type of build, options are: Debug Release RelWithDebInfo" FORCE)
 set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /await")
 
 # Build into %appdata%/Amethyst
 set(AmethystFolder "$ENV{localappdata}/Packages/Microsoft.MinecraftUWP_8wekyb3d8bbwe/AC/Amethyst/")
