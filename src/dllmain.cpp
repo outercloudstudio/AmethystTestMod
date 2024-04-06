@@ -24,14 +24,14 @@ ContentLog* ContentLog_CTOR(ContentLog* contentLog) {
     return contentLog;
 }
 
-SafetyHookInline _ContentLog__WriteToLog;
-void ContentLog__WriteToLog(ContentLog* contentLog, bool a1, unsigned int logLevel, unsigned int logArea, ...) {
-    Log::Info("Content Log Pointer: {}", (uint64_t)contentLog);
+// SafetyHookInline _ContentLog__WriteToLog;
+// void ContentLog__WriteToLog(ContentLog* contentLog, bool a1, unsigned int logLevel, unsigned int logArea, ...) {
+//     Log::Info("Content Log Pointer: {}", (uint64_t)contentLog);
 
-    uintptr_t vtableAddr = reinterpret_cast<uintptr_t>(contentLog->vtable);
+//     uintptr_t vtableAddr = reinterpret_cast<uintptr_t>(contentLog->vtable);
 
-    Log::Info("0x{:x}", vtableAddr);
-}
+//     Log::Info("0x{:x}", vtableAddr);
+// }
 
 void OnJoin(ClientInstance* client) {
     std::string message = "CUSTOM LOG :D";
@@ -45,8 +45,8 @@ void OnJoin(ClientInstance* client) {
 
 ModFunction void Initialize(AmethystContext* ctx)
 {
-    ctx->mHookManager.RegisterFunction<&ContentLog_CTOR>("48 89 5C 24 ? 48 89 4C 24 ? 57 48 83 EC ? 48 8B F9 48 8D 05 ? ? ? ? 48 89 01 48 89 4C 24 ? 48 83 C1 ? 48 8D 54 24 ? E8 ? ? ? ? 90 48 8D 05 ? ? ? ? 48 89 07 C6 47");
-    ctx->mHookManager.CreateHook<&ContentLog_CTOR>(_ContentLog_CTOR, &ContentLog_CTOR);
+    // ctx->mHookManager.RegisterFunction<&ContentLog_CTOR>("48 89 5C 24 ? 48 89 4C 24 ? 57 48 83 EC ? 48 8B F9 48 8D 05 ? ? ? ? 48 89 01 48 89 4C 24 ? 48 83 C1 ? 48 8D 54 24 ? E8 ? ? ? ? 90 48 8D 05 ? ? ? ? 48 89 07 C6 47");
+    // ctx->mHookManager.CreateHook<&ContentLog_CTOR>(_ContentLog_CTOR, &ContentLog_CTOR);
 
     ctx->mEventManager.onStartJoinGame.AddListener(&OnJoin);
 
