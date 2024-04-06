@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Build",
+			"command": "cd build; msbuild Amethyst-Template.sln",
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"label": "Full Build",
+			"command": "mkdir build; cd build; cmake ..; msbuild Amethyst-Template.sln",
+			"problemMatcher": []
+		}
+	]
+}
