@@ -45,11 +45,11 @@ void OnJoin(ClientInstance* client) {
 
 ModFunction void Initialize(AmethystContext* ctx)
 {
-    // ctx->mHookManager.RegisterFunction<&ContentLog_CTOR>("48 89 5C 24 ? 48 89 4C 24 ? 57 48 83 EC ? 48 8B F9 48 8D 05 ? ? ? ? 48 89 01 48 89 4C 24 ? 48 83 C1 ? 48 8D 54 24 ? E8 ? ? ? ? 90 48 8D 05 ? ? ? ? 48 89 07 C6 47");
-    // ctx->mHookManager.CreateHook<&ContentLog_CTOR>(_ContentLog_CTOR, &ContentLog_CTOR);
+    ctx->mHookManager.RegisterFunction<&ContentLog_CTOR>("48 89 5C 24 ? 48 89 4C 24 ? 57 48 83 EC ? 48 8B F9 48 8D 05 ? ? ? ? 48 89 01 48 89 4C 24 ? 48 83 C1 ? 48 8D 54 24 ? E8 ? ? ? ? 90 48 8D 05 ? ? ? ? 48 89 07 C6 47");
+    ctx->mHookManager.CreateHook<&ContentLog_CTOR>(_ContentLog_CTOR, &ContentLog_CTOR);
 
     ctx->mEventManager.onStartJoinGame.AddListener(&OnJoin);
 
-    ctx->mHookManager.RegisterFunction<&ContentLog__WriteToLog>("48 89 5C 24 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 ? 88 54 24");
-    ctx->mHookManager.CreateHook<&ContentLog__WriteToLog>(_ContentLog__WriteToLog, &ContentLog__WriteToLog);
+    // ctx->mHookManager.RegisterFunction<&ContentLog__WriteToLog>("48 89 5C 24 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 ? 88 54 24");
+    // ctx->mHookManager.CreateHook<&ContentLog__WriteToLog>(_ContentLog__WriteToLog, &ContentLog__WriteToLog);
 }
