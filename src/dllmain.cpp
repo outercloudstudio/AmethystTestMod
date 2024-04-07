@@ -1,9 +1,5 @@
 ﻿#include "dllmain.h"
-
-class ContentLog {
-public:
-    uintptr_t** vtable;
-};
+#include "ContentLog.cpp"
 
 ContentLog* CONTENT_LOG = nullptr;
 
@@ -16,20 +12,16 @@ ContentLog* ContentLog_CTOR(ContentLog* contentLog) {
     return contentLog;
 }
 
-SafetyHookInline _ContentLog__Log;
-int ContentLog__Log(ContentLog* contentLog, bool doNotRepeat, unsigned int logLevel, unsigned int logArea, char* strings) {
-    Log::Info("Do not repeat: {} Log level: {} Log area: {} String: {}", doNotRepeat, logLevel, logArea, strings);
+// SafetyHookInline _ContentLog__Log;
+// int ContentLog__Log(ContentLog* contentLog, bool doNotRepeat, unsigned int logLevel, unsigned int logArea, char* strings) {
+//     Log::Info("Do not repeat: {} Log level: {} Log area: {} String: {}", doNotRepeat, logLevel, logArea, strings);
 
-    return _ContentLog__Log.call<int>(contentLog, doNotRepeat, logLevel, logLevel, strings);
-}
+//     return _ContentLog__Log.call<int>(contentLog, doNotRepeat, logLevel, logLevel, strings);
+// }
 
 SafetyHookInline _TestHook;
 int64_t TestHook(int64_t a1, int64_t* a2, int64_t a3, int64_t a4, int a5, int* a6, int8_t a7, int a8, int64_t* a9, char a10) {
-    char message[] = "YOU";
-
-    Log::Info("Test: {}", message);
-
-    _ContentLog__Log.call<int>(CONTENT_LOG, false, 3, 29, message);
+    CONTENT_LOG->Log(false, LogLevel::Error, LogArea::Addon, "Cool Test :D");
 
     return _TestHook.call<int64_t>(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
 }
@@ -45,6 +37,6 @@ ModFunction void Initialize(AmethystContext* ctx)
     ctx->mHookManager.RegisterFunction<&ContentLog_CTOR>("48 89 5C 24 ? 48 89 4C 24 ? 57 48 83 EC ? 48 8B F9 48 8D 05 ? ? ? ? 48 89 01 48 89 4C 24 ? 48 83 C1 ? 48 8D 54 24 ? E8 ? ? ? ? 90 48 8D 05 ? ? ? ? 48 89 07 C6 47");
     ctx->mHookManager.CreateHook<&ContentLog_CTOR>(_ContentLog_CTOR, &ContentLog_CTOR);
 
-    ctx->mHookManager.RegisterFunction<&ContentLog__Log>("44 89 4C 24 ? 48 83 EC");
-    ctx->mHookManager.CreateHook<&ContentLog__Log>(_ContentLog__Log, &ContentLog__Log);
+    // ctx->mHookManager.RegisterFunction<&ContentLog__Log>("44 89 4C 24 ? 48 83 EC");
+    // ctx->mHookManager.CreateHook<&ContentLog__Log>(_ContentLog__Log, &ContentLog__Log);
 }
