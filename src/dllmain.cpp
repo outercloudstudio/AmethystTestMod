@@ -21,14 +21,11 @@ ContentLog* ContentLog_CTOR(ContentLog* contentLog) {
 
     CONTENT_LOG = contentLog;
 
-    std::string message = "CUSTOM LOG :D";
+    char message = '\0';
+    char* message_ptr = &message;
+    char* messages_ptr[] = { message_ptr };
 
-    Log::Info("Message: {}", message);
-
-    char* c = const_cast<char*>(message.c_str());
-    char* cs[] = { c };
-
-    WriteToLog(CONTENT_LOG, true, 3, 6, cs);
+    WriteToLog(CONTENT_LOG, true, 3, 6, messages_ptr);
 
     return contentLog;
 }
