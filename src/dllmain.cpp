@@ -21,8 +21,6 @@ int ContentLog__Log(ContentLog* contentLog, bool doNotRepeat, unsigned int logAr
     Log::Info("strings {}", strings);
     Log::Info("strings2 {}", *(&strings + 1));
 
-    // char message[] = "Who is a goofy goober: `%s`";
-    // char message2[] = "YOU";
     // char** messages = new char* [] { message, message2 };
     // char*** newStrings = &messages;
 
@@ -42,11 +40,15 @@ int ContentLog__Log(ContentLog* contentLog, bool doNotRepeat, unsigned int logAr
 SafetyHookInline _TestHook;
 int64_t TestHook(int64_t a1, int64_t* a2, int64_t a3, int64_t a4, int a5, int* a6, int8_t a7, int a8, int64_t* a9, char a10) {
     // char message[] = "[[Jigsaw Structure]] couldn't be constructed, no pool named `%s`";
-    // char message2[] = "brooo";
+    char message[] = "brooo";
     // char** messages = new char* [] { message, message2 };
     // char*** strings = &messages;
 
     // WriteToLog(CONTENT_LOG, true, 29, 3, strings);
+
+    Log::Info("Test: {}", message);
+
+    _ContentLog__Log.call<int>(CONTENT_LOG, false, 29, 3, message);
 
     return _TestHook.call<int64_t>(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
 }
