@@ -17,38 +17,19 @@ ContentLog* ContentLog_CTOR(ContentLog* contentLog) {
 }
 
 SafetyHookInline _ContentLog__Log;
-int ContentLog__Log(ContentLog* contentLog, bool doNotRepeat, unsigned int logArea, unsigned int logLevel, char* strings) {
-    Log::Info("strings {}", strings);
-    Log::Info("strings2 {}", *(&strings + 1));
+int ContentLog__Log(ContentLog* contentLog, bool doNotRepeat, unsigned int logLevel, unsigned int logArea, char* strings) {
+    Log::Info("Do not repeat: {} Log level: {} Log area: {} String: {}", doNotRepeat, logLevel, logArea, strings);
 
-    // char** messages = new char* [] { message, message2 };
-    // char*** newStrings = &messages;
-
-    return _ContentLog__Log.call<int>(contentLog, doNotRepeat, logArea, logLevel, strings);
+    return _ContentLog__Log.call<int>(contentLog, doNotRepeat, logLevel, logLevel, strings);
 }
-
-// uint64_t WriteToLog(ContentLog* contentLog, bool a1, unsigned int logArea, unsigned int logLevel, char*** strings) {
-//     using function = decltype(&WriteToLog);
-//     static auto func = std::bit_cast<function>(SigScan("48 89 5C 24 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 ? 88 54 24"));
-
-//     Log::Info("*strings[0] {}", (*strings)[0]);
-//     Log::Info("*strings[1] {}", (*strings)[1]);
-
-//     return _ContentLog__WriteToLog.call<int>(CONTENT_LOG, true, logArea, logLevel, strings);
-// }
 
 SafetyHookInline _TestHook;
 int64_t TestHook(int64_t a1, int64_t* a2, int64_t a3, int64_t a4, int a5, int* a6, int8_t a7, int a8, int64_t* a9, char a10) {
-    // char message[] = "[[Jigsaw Structure]] couldn't be constructed, no pool named `%s`";
-    char message[] = "brooo";
-    // char** messages = new char* [] { message, message2 };
-    // char*** strings = &messages;
-
-    // WriteToLog(CONTENT_LOG, true, 29, 3, strings);
+    char message[] = "YOU";
 
     Log::Info("Test: {}", message);
 
-    _ContentLog__Log.call<int>(CONTENT_LOG, false, 29, 3, message);
+    _ContentLog__Log.call<int>(CONTENT_LOG, false, 3, 29, message);
 
     return _TestHook.call<int64_t>(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
 }
